@@ -2,166 +2,89 @@ import speech_recognition as sr
 
 import pyttsx3
 
-from googletrans import Translator  # Google Translate API
+from datetime import datetime
 
 
-# Initialize text-to-speech engine
-
-def speak(text, language="en"):
+def speak(text):
 
     engine = pyttsx3.init()
 
-    engine.setProperty('rate', 150)  # Speed of speech
-
-    voices = engine.getProperty('voices')
-
-   
-
-    # Set voice for English or other language if supported by pyttsx3
-
-    if language == "en":
-
-        engine.setProperty('voice', voices[0].id)  # Default English voice
-
-    else:
-
-        engine.setProperty('voice', voices[1].id)  # Fallback to another voice if available
-
-   
+    engine.setProperty('rate', 150)
 
     engine.say(text)
 
     engine.runAndWait()
 
 
-# Speech-to-Text: Recognize spoken language (English)
+def get_audio():
 
-def speech_to_text():
-
-    recognizer = sr.Recognizer()
+    r = sr.Recognizer()
 
     with sr.Microphone() as source:
 
-        print("🎤 Please speak now in English...")
+        print("🎤 Speak now...")
 
-        audio = recognizer.listen(source)
+        audio = r.listen(source)
 
+        try:
 
-    try:
+            command = r.recognize_google(audio)
 
-        print("🔍 Recognizing speech...")
+            print(f"✅ You said: {command}")
 
-        text = recognizer.recognize_google(audio, language="en-US")  # Use English for speech recognition
+            return command.lower()
 
-        print(f"✅ You said: {text}")
+        except sr.UnknownValueError:
 
-        return text
+            print("❌ Could not understand.")
 
-    except sr.UnknownValueError:
+        except sr.RequestError as e:
 
-        print("❌ Could not understand the audio.")
-
-    except sr.RequestError as e:
-
-        print(f"❌ API Error: {e}")
+            print(f"❌ API Error: {e}")
 
     return ""
 
 
-# Translate text using Google Translate API
+def respond_to_command(command):
 
-def translate_text(text, target_language="es"):  # Default target language is Spanish (es)
+    if "hello" in command:
 
-    translator = Translator()
+        speak("Hi there! How can I help you today?")
 
-    translation = translator.translate(text, dest=target_language)
+    elif "your name" in command:
 
-    print(f"🌍 Translated text: {translation.text}")
+        speak("I am your Python voice assistant.")
 
-    return translation.text
+    elif "time" in command:
 
+        now = datetime.now().strftime("%H:%M")
 
-# Display language options to the user
+        speak(f"The time is {now}")
 
-def display_language_options():
+    elif "exit" in command or "stop" in command:
 
-    print("🌍 Available translation languages: ")
+        speak("Goodbye!")
 
-    print("1. Hindi (hi)")
+        return False
 
-    print("2. Tamil (ta)")
+    else:
 
-    print("3. Telugu (te)")
+        speak("I'm not sure how to help with that.")
 
-    print("4. Bengali (bn)")
+    return True
 
-    print("5. Marathi (mr)")
-
-    print("6. Gujarati (gu)")
-
-    print("7. Malayalam (ml)")
-
-    print("8. Punjabi (pa)")
-
-
-    # User selects language
-
-    choice = input("Please select the target language number (1-8): ")
-
-    language_dict = {
-
-        "1": "hi",
-
-        "2": "ta",
-
-        "3": "te",
-
-        "4": "bn",
-
-        "5": "mr",
-
-        "6": "gu",
-
-        "7": "ml",
-
-        "8": "pa"
-
-    }
-
-   
-
-    return language_dict.get(choice, "es")  # Default to Spanish if invalid input
-
-
-# Main function to combine all steps
 
 def main():
 
-    # Step 1: Display language options and get user's choice
+    speak("Voice assistant activated. Say something!")
 
-    target_language = display_language_options()
+    while True:
 
-   
+        command = get_audio()
 
-    # Step 2: Speech-to-Text (recognizing English speech)
+        if command and not respond_to_command(command):
 
-    original_text = speech_to_text()
-
-   
-
-    if original_text:
-
-        # Step 3: Translate to selected target language
-
-        translated_text = translate_text(original_text, target_language=target_language)
-
-       
-
-        # Step 4: Text-to-Speech (Translate output and speak it)
-
-        speak(translated_text, language="en")  # Speak the translation in English
-
-        print("✅ Translation spoken out!")
+            break
 
 
 if __name__ == "__main__":
