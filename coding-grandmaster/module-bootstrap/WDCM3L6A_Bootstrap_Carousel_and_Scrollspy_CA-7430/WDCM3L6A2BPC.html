@@ -1,0 +1,66 @@
+<!--
+1) Start the HTML document with `<!DOCTYPE html>` to indicate an HTML5 page.
+
+2) Open the `<html>` tag to wrap the full webpage.
+
+3) Inside the `<head>` section:
+   a) Add `<meta charset="utf-8">` to support special characters.
+   b) Add `<meta name="viewport" content="width=device-width, initial-scale=1">`
+      to make the page responsive.
+   c) Link Bootstrap 3.4.0 CSS using the CDN link.
+   d) Link Bootstrap 3.4.0 JavaScript using the CDN script tag.
+      NOTE: Bootstrap 3 scrollspy and navbar toggle normally require jQuery too.
+
+4) Add internal CSS inside `<style>`:
+   a) `body { position: relative; }` is required for Scrollspy to work properly.
+   b) Set paragraph font size to 18px.
+   c) Style `#section1` and `#section2`:
+      - Add top padding so content is not hidden behind fixed navbar.
+      - Set height to 500px to create scrollable sections.
+      - Set text and background colors.
+
+5) Inside the `<body>` tag, enable Scrollspy:
+   a) `data-spy="scroll"` turns on scrollspy.
+   b) `data-target=".navbar"` tells scrollspy which navbar to update.
+   c) `data-offset="50"` adjusts the scroll offset for highlighting links.
+
+6) Create a fixed top navbar using:
+   `<nav class="navbar navbar-inverse navbar-fixed-top">`
+   a) `navbar-inverse` gives a dark navbar style.
+   b) `navbar-fixed-top` keeps the navbar stuck at the top while scrolling.
+
+7) Inside the navbar:
+   a) Use `<div class="container-fluid">` for full-width navbar content.
+   b) Create a navbar header section:
+      - Add a toggle button (`navbar-toggle`) for small screens.
+      - The button uses `data-toggle="collapse"` and `data-target="#myNavbar"`
+        to show/hide the menu.
+      - Add a brand link "Codingal" using `<a class="navbar-brand">`.
+
+8) Create the collapsible menu area:
+   a) Wrap menu links inside `<div class="collapse navbar-collapse" id="myNavbar">`.
+   b) Create a list `<ul class="nav navbar-nav">` for navigation links.
+   c) Each link points to a page section using anchor IDs:
+      - `href="#section1"`
+      - `href="#section2"`
+
+9) Create Section 1 content:
+   a) Use `<div id="section1" class="container-fluid">` so the anchor link works.
+   b) Add headings and a long description about Codingal.
+   c) Add a paragraph instructing to scroll.
+
+10) Create Section 2 content:
+    a) Use `<div id="section2" class="container-fluid">`.
+    b) Add headings and a short description about the founders.
+    c) Add a paragraph instructing to scroll.
+
+11) Scrolling behavior:
+    a) As you scroll through sections, Scrollspy highlights the active navbar link
+       based on which section is currently in view.
+
+12) Note about HTML correctness:
+    a) There are `<h5>` tags closed with `</h6>` in both sections.
+       They should be closed with `</h5>`.
+
+13) Close the `<body>` and `<html>` tags to end the document.
+-->

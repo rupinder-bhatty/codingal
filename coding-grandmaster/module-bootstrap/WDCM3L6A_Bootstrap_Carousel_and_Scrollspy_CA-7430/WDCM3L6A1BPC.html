@@ -1,0 +1,51 @@
+<!--
+1) Start the HTML document with `<!DOCTYPE html>` and set language as English using `<html lang="en">`.
+
+2) Inside the `<head>` section:
+   a) Set the page title using `<title>Bootstrap Example</title>`.
+   b) Add `<meta charset="utf-8">` to support special characters.
+   c) Add `<meta name="viewport" content="width=device-width, initial-scale=1">`
+      to make the page responsive.
+   d) Link Bootstrap 3.4.1 CSS using the CDN link.
+   e) Link jQuery using the CDN link (Bootstrap 3 requires jQuery).
+   f) Link Bootstrap 3.4.1 JavaScript using the CDN link (needed for carousel sliding).
+
+3) Inside the `<body>` section:
+
+4) Create a Bootstrap container using `<div class="container">`:
+   a) Adds padding and centers content.
+
+5) Add a heading `<h2>`: "Carousel Example".
+
+6) Create the carousel wrapper:
+   a) `<div id="myCarousel" class="carousel slide" data-ride="carousel">`
+      - `id="myCarousel"` is used to connect indicators and controls.
+      - `carousel slide` enables carousel and sliding animation.
+      - `data-ride="carousel"` starts the carousel automatically.
+
+7) Add carousel indicators (the small dots at the bottom):
+   a) Use `<ol class="carousel-indicators">`.
+   b) Each `<li>` uses:
+      - `data-target="#myCarousel"` to point to the carousel.
+      - `data-slide-to="0/1/2"` to point to each slide.
+      - The first indicator has `class="active"`.
+
+8) Add carousel slides inside `<div class="carousel-inner">`:
+   a) Each slide uses `<div class="item">`.
+   b) The first slide has `class="item active"` so it shows first.
+   c) Each slide contains an `<img>` tag with its image file and alt text.
+
+9) Add left and right controls (previous/next arrows):
+   a) Left control:
+      - `<a class="left carousel-control" ... data-slide="prev">`
+      - Shows a left arrow icon using glyphicon.
+      - Includes screen-reader text "Previous".
+      NOTE: The `href` is empty in your left control. It should point to `#myCarousel`.
+   b) Right control:
+      - `<a class="right carousel-control" href="#myCarousel" data-slide="next">`
+      - Shows a right arrow icon using glyphicon.
+      - Includes screen-reader text "Next".
+
+10) Close all tags:
+    a) Close carousel divs, container div, body, and html.
+-->
